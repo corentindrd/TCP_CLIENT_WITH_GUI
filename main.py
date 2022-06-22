@@ -2,7 +2,12 @@ import math
 import socket
 import threading
 import time
-import pifacedigitalio as p
+
+try:
+    import pifacedigitalio as p
+except:
+    pass
+
 from datetime import datetime
 from tkinter import *
 
@@ -115,17 +120,23 @@ def onair():
     while True:
         try:
             if connected is False:
-                sock.connect(('192.168.1.86', 65432))
+                sock.connect(('192.168.1.29', 65432))
                 print("Connexion au serveur réussie")
             message = sock.recv(1024).decode("UTF-8")
             if message.find("10,1") != -1:
                 stop_chronometer()
                 start_chronometer()
-                p.digital_write(0, 1)
+                try:
+                    p.digital_write(0, 1)
+                except:
+                    pass
                 title.config(text="ON AIR", font=("Avenir-Black", title_size), bg='#ff0000', fg='white')
             elif message.find("10,0") != -1:
                 stop_chronometer()
-                p.digital_write(0, 0)
+                try:
+                    p.digital_write(0, 0)
+                except:
+                    pass
                 title.config(text="ON AIR", font=("Avenir-Black", title_size), bg='#4D0000', fg='black')
 
         except socket.error:
@@ -134,7 +145,7 @@ def onair():
             print("Connexion perdue... reconnexion")
             while not connected:
                 try:
-                    sock.connect(('192.168.1.86', 65432))
+                    sock.connect(('192.168.1.29', 65432))
                     connected = True
                     print("Re-connexion réussie")
                 except socket.error:
@@ -142,7 +153,11 @@ def onair():
     sock.close()
 
 # init
-p.init()
+try:
+    p.init()
+except:
+    pass
+
 root = Tk()
 
 # récupère les informations de l'écran pour mettre à niveau

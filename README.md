@@ -10,9 +10,6 @@ Fonctionnement:
 - Carte IN OUT Piface Digital 2
 ***
 
-## ⚠️ Important
-Le programme fonctionne seulement si la carte PiFace est bien détectée par le raspberry (automatique dans le programme)
-***
 ## Prérequis
 - Raspberry PI 4 (2,4,8G) ([Raspberry](https://www.kubii.fr/cartes-raspberry-pi/2772-nouveau-raspberry-pi-4-modele-b-4gb-kubii-0765756931182.html))
 - PiFace digital 2 ([PiFace](https://shop.mchobby.be/fr/pi-hats/221-piface-digital-2-pour-raspberry-pi-3232100002210.html))
@@ -32,6 +29,10 @@ Le programme fonctionne seulement si la carte PiFace est bien détectée par le 
   - PiFace
 ***
 ## CHANGELOG
+### V1.2
+#### **Principaux ajouts :**
+- L'interface graphique fonctionne même sans la carte électronique PiFace d'installée
+
 ### V1.1
 #### **Principaux ajouts :**
 - La latence entre les secondes de l'heure et les secondes s'affichant en jaune a été réduite.
