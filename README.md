@@ -31,10 +31,10 @@ Le programme fonctionne seulement si la carte PiFace est bien détectée par le 
 # CHANGELOG
 ### V1.1
 #### **Principaux ajouts:**
-- La latence entre les secondes de l'heure et les secondes s'affichant en jaune à été réduit.
+- La latence entre les secondes de l'heure et les secondes s'affichant en jaune a été réduite.
 - Le titre ONAIR se place automatiquement en haut en fonction de la taille de l'écran.
 - Le chronomètre se place automatiquement en bas en fonction de la taille de l'écran.
-- L'horloge ce met au centre en fonction de la taille de l'écran.
+- L'horloge se met au centre en fonction de la taille de l'écran.
 #### **Améliorations:**
 - Nettoyage du code sur les fonctions de créations (chronomètre et titres).
 - La fonction "chrono.pack" dans le système de réception de trame TCP a été enlevée car le chrono est déjà initialisé au début du programme.
