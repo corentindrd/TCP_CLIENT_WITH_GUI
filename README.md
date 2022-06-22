@@ -31,7 +31,7 @@ Le programme fonctionne seulement si la carte PiFace est bien détectée par le 
   - Python3
   - PiFace
 ***
-# CHANGELOG
+## CHANGELOG
 ### V1.1
 #### **Principaux ajouts :**
 - La latence entre les secondes de l'heure et les secondes s'affichant en jaune a été réduite.
@@ -47,7 +47,11 @@ Le programme fonctionne seulement si la carte PiFace est bien détectée par le 
 
 ### V1.0
 - Programme initial
-
 ***
 
+## Crédits
+- Stéphane Ayreault
+- Mathieu Amiaud
+- Aurélien Menard
+***
 
