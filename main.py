@@ -63,37 +63,27 @@ def resume_chronometer():
     except:
         pass
 
-# fonction heure
-def clock():
-    hour.config(text=datetime.now().strftime("%H:%M:%S"), fg='#0003FF', bg='black', font=("ds-digital", clock_size))
-    time.sleep(0.01)
-
 # fonction création secondes
 def trigo():
-    root.after(380)
-    second = int(datetime.now().strftime("%S"))
-
-    if second == 0:
-        C.delete("second")
-    else:
-        second = second - 15
-        for angle in range(-15, 45):
-            if angle <= second:
-                angle = ((angle * 6) * math.pi) / 180
-                x = rayon + ((rayon * 0.80) * math.cos(angle))
-                y = rayon + ((rayon * 0.80) * math.sin(angle))
-                x1 = int(x) - 5
-                y1 = int(y) - 5
-                x2 = int(x) + 5
-                y2 = int(y) + 5
-                C.create_oval(x1, y1, x2, y2, fill='#FFAA00', tags="second")
-                C.place(relx=0.5, rely=0.5, anchor=CENTER)
-
-# fonction start secondes + heure
-def second():
     while True:
-        clock()
-        trigo()
+        second = int(datetime.now().strftime("%S"))
+
+        if second == 0:
+            C.delete("second")
+        else:
+            second = second - 15
+            for angle in range(-15, 45):
+                if angle <= second:
+                    angle = ((angle * 6) * math.pi) / 180
+                    x = rayon + ((rayon * 0.80) * math.cos(angle))
+                    y = rayon + ((rayon * 0.80) * math.sin(angle))
+                    x1 = int(x) - 5
+                    y1 = int(y) - 5
+                    x2 = int(x) + 5
+                    y2 = int(y) + 5
+                    C.create_oval(x1, y1, x2, y2, fill='#FFAA00', tags="second")
+                    C.place(relx=0.5, rely=0.5, anchor=CENTER)
+            hour.config(text=datetime.now().strftime("%H:%M:%S"))
 
 # fonctio input piface raspberry
 def piface_read():
@@ -169,7 +159,7 @@ initial_screen = 1920
 title_size = int(172 * screen_width / initial_screen)
 chrono_size = int(142 * screen_width / initial_screen)
 canvas_size = int(500 * screen_width / initial_screen)
-clock_size = int(65 * screen_width / initial_screen)
+clock_size = int(60 * screen_width / initial_screen)
 width = int(515 * screen_width / initial_screen)
 
 #initialisation des variables générales
@@ -197,7 +187,7 @@ chrono.place(relx=0.5, rely=0.9, anchor=CENTER)
 
 #création des threads
 th1 = threading.Thread(target=onair, daemon=True)
-th2 = threading.Thread(target=second, daemon=True)
+th2 = threading.Thread(target=trigo, daemon=True)
 th3 = threading.Thread(target=piface_read, daemon=True)
 
 #initialisation du client TCP
@@ -219,7 +209,7 @@ for angle in range(0, 12):
 #C.create_oval(145, 25, 155, 35, fill='#FFAA00', tags="first")
 
 #création de l'heure
-hour = Label(root, text="")
+hour = Label(root, text="",fg='#0003FF', bg='black', font=("ds-digital", clock_size))
 hour.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 #th3.start()

@@ -67,6 +67,11 @@ Rajouter en bas du fichier `@sudo python3 main.py`
 
 ***
 ## CHANGELOG
+### V1.3.1
+#### **Améliorations et divers :**
+- Diminution du lag des secondes entre l'heure et les points jaunes.
+  - La fonction des heures a été déplacée dans la fonction trigonométrie pour éviter la latence.
+  - La fonction "second" a été suprrimée pour éviter la latence.
 ### V1.3
 #### **Principaux ajouts :**
 - L'heure du milieu ne disparait plus à certains moments lors du changement de seconde.
