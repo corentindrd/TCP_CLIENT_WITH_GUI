@@ -19,43 +19,49 @@ Fonctionnement:
 - Cable micro HDMI vers HDMI
 - Raspberry Imager ([Téléchargement](https://www.raspberrypi.com/software/))
 - FileZilla pour l'envoi de fichier par FTP ([Téléchargement](https://filezilla-project.org/download.php?type=client))
-- Un clavier et une souris pour la première installation sur le raspberry
+- Un clavier et une souris pour la première configuration du RPI
 ***
 ## MISE EN PLACE DU PROGRAMME
 Pour une bonne utilisation du programme en fonction de votre installation il suffit de changer l'adresse IP et le port à la ligne 123 et 148
+avec les informations correspondantes de votre serveur TCP.
 ## INSTALLATION RPI
 
 - Flasher Raspbian Desktop sur la carte SD avec Raspberry Imager.
   - Prendre la version Raspberry pi OS 4 avec Bureau.
   - Activer le SSH afin de rendre la première installation plus simple (CTRL+MAJ+X sur RPI imager pour activer le SSH).
 - Brancher votre RPI au secteur tout en aillant installé et branché votre écran, clavier, souris et avoir inséré votre carte SD avec le système d'exploitation.
-  - Suivez les instructions du premier démarrage du RPI
-  - Après avoir terminé la configuration du premier démarrage, il faut se rendre dans la framboise en haut à gauche > préférences > configuration du RPI > Display > et passer Screen Blanking à OFF (Mise en veille de l'écran)
-- Mettre à jour le raspberry (`sudo apt-get update & sudo apt-get upgrade -y`)
+  - Suivez les instructions du premier démarrage du RPI.
+  - Après avoir terminé la configuration du premier démarrage, il faut se rendre dans la framboise en haut à gauche > préférences > configuration du RPI > Display > et passer Screen Blanking à OFF (Mise en veille de l'écran).
+- Mettre à jour le raspberry (`sudo apt-get update & sudo apt-get upgrade -y`).
   - Faire un `sudo apt autoremove` si des paquets ne sont plus utilisés.
   - Faire un reboot du RPI après la mise à jour `sudo reboot`.
-- Installer la carte PiFace sur le raspberry
+- Installer la carte PiFace sur le raspberry.
 - Installer un serveur FTP sur le RPI pour transmettre le programme en réseau pour ne pas utiliser de clé usb ou disque dur externe.
   - `sudo apt install proftpd`
-  - Sur FileZilla, rentrer l'adresse IP du RPI et les identifiants sont les mêmes que ceux rentrés au démarrage du RPI
-  - (Tuto [ici](https://raspberry-pi.fr/installer-serveur-ftp-raspberry-pi/) pour les compléments)
-- Mettre le fichier Main.py dans le répertoire afficher sur FileZilla 
-  - Utiliser la commande `ls` en ouvrant un terminal sur le RPI pour voir si le fichier est bien présent
-- Activer la fonction SPI du raspberry pour la prise en charge de la carte PiFace
+  - Sur FileZilla, rentrer l'adresse IP du RPI et les identifiants sont les mêmes que ceux rentrés au démarrage du RPI.
+  - (Tuto [ici](https://raspberry-pi.fr/installer-serveur-ftp-raspberry-pi/) pour les compléments).
+- Mettre le fichier Main.py dans le répertoire afficher sur FileZilla.
+  - Utiliser la commande `ls` en ouvrant un terminal sur le RPI pour voir si le fichier est bien présent.
+- Activer la fonction SPI du raspberry pour la prise en charge de la carte PiFace.
   - `sudo raspi-config` > Interface Options > SPI > Enable
-- Installer PIP pour python 3 s'il n'est pas installé
+- Installer PIP pour python 3 s'il n'est pas installé.
   - `sudo apt install python3-pip`
-- Installation des librairies requises pour la carte PiFace
+- Installation des librairies requises pour la carte PiFace.
   - `sudo pip3 install pifacecommon`
   - `sudo pip3 install pifacedigitalio`
   - Tuto complet [ici](https://github.com/piface/pifacedigitalio)
 
 #### Lancement automatique au démarrage du RPI :
-- Ouvrir un terminal  
+- Ouvrir un terminal.
 `sudo nano /etc/xdg/lxsession/LXDE-PI/autostart`  
 Rajouter en bas du fichier `@sudo python3 main.py`
-#### ❗ Messages d'erreurs ❗:
-- "No PiFace Digital board detected"
+#### ❗ Problèmes connus ❗:
+- Le programme ne se lance pas au démarrage du RPI:
+  - Le fichier autostart qui à été modifier n'est pas le bon car il y a deux répertoires:    
+  `/etc/xdg/lxsession/LXDE-PI/autostart` et `/etc/xdg/lxsession/LXDE/autostart` le premier répertoire est le bon.
+  - Le fichier main.py n'est pas dans le bon répertoire, le fichier autostart est défini de base dans le répertoire `/home/pi/`  
+  Si le programme est dans un autre répertoire il faut l'indiquer dans le fichier autostart EXEMPLE : `@sudo python3 /home/pi/radio/main.py`
+- "No PiFace Digital board detected":
   - Enlever et remettre bien la carte sur le RPI puis relancer le programme
   - Refaire la procédure d'installation des librairies
 #### Enlever la mise en veille du RPI:
