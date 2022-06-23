@@ -21,11 +21,16 @@ Fonctionnement:
 - FileZilla pour l'envoi de fichier par FTP ([Téléchargement](https://filezilla-project.org/download.php?type=client))
 - Un clavier et une souris pour la première installation sur le raspberry
 ***
-## INSTALLATION
+## MISE EN PLACE DU PROGRAMME
+Pour une bonne utilisation du programme en fonction de votre installation il suffit de changer l'adresse IP et le port à la ligne 123 et 148
+## INSTALLATION RPI
 
 - Flasher Raspbian Desktop sur la carte SD avec Raspberry Imager.
   - Prendre la version Raspberry pi OS 4 avec Bureau.
   - Activer le SSH afin de rendre la première installation plus simple (CTRL+MAJ+X sur RPI imager pour activer le SSH).
+- Brancher votre RPI au secteur tout en aillant installé et branché votre écran, clavier, souris et avoir inséré votre carte SD avec le système d'exploitation.
+  - Suivez les instructions du premier démarrage du RPI
+  - Après avoir terminé la configuration du premier démarrage, il faut se rendre dans la framboise en haut à gauche > préférences > configuration du RPI > Display > et passer Screen Blanking à OFF (Mise en veille de l'écran)
 - Mettre à jour le raspberry (`sudo apt-get update & sudo apt-get upgrade -y`)
   - Faire un `sudo apt autoremove` si des paquets ne sont plus utilisés.
   - Faire un reboot du RPI après la mise à jour `sudo reboot`.
@@ -53,6 +58,8 @@ Rajouter en bas du fichier `@sudo python3 main.py`
 - "No PiFace Digital board detected"
   - Enlever et remettre bien la carte sur le RPI puis relancer le programme
   - Refaire la procédure d'installation des librairies
+#### Enlever la mise en veille du RPI:
+
 
 ***
 ## CHANGELOG
