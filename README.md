@@ -67,6 +67,15 @@ Rajouter en bas du fichier `@sudo python3 main.py`
 
 ***
 ## CHANGELOG
+### V1.3
+#### **Principaux ajouts :**
+- L'heure du milieu ne disparait plus à certains moments lors du changement de seconde.
+  - Le texte n'est désormais plus géré par la fonction canvas de tkinter, il est maintenant géré par la fonction "Label" de tkinter.
+- Le programme s'arrête complètement après la fermeture de la page, ce qui n'était pas le cas avant.
+  - L'attribut "daemon" de tous les threads a été passé à "True".
+#### **Améliorations et divers :**
+- La variable "initial_screen" a été créée pour la valeur "1920" qui est la valeur initiale qui permet le calcul de la mise à l'échelle d'écran.
+- La fonction datetime pour la trigonométrie des secondes a été améliorée.
 ### V1.2.1
 #### **Améliorations et divers :**
 - La variable "canvas_size" n'était pas initialisée.
@@ -74,7 +83,7 @@ Rajouter en bas du fichier `@sudo python3 main.py`
 - Changement de la taille des secondes et des heures qui était trop grande.
 ### V1.2.0
 #### **Principaux ajouts :**
-- L'interface graphique fonctionne même sans la carte électronique PiFace d'installée
+- L'interface graphique fonctionne même sans la carte électronique PiFace installée
 
 ### V1.1
 #### **Principaux ajouts :**

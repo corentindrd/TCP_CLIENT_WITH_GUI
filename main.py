@@ -65,14 +65,13 @@ def resume_chronometer():
 
 # fonction heure
 def clock():
-    C.delete("clock")
-    C.create_text(width / 2, width / 2, font=("ds-digital", clock_size), text=datetime.now().strftime("%H:%M:%S"),fill="#0003FF", tags="clock")
-    time.sleep(0.6)
+    hour.config(text=datetime.now().strftime("%H:%M:%S"), fg='#0003FF', bg='black', font=("ds-digital", clock_size))
+    time.sleep(0.01)
 
 # fonction création secondes
 def trigo():
     root.after(380)
-    second = datetime.now().second
+    second = int(datetime.now().strftime("%S"))
 
     if second == 0:
         C.delete("second")
@@ -166,11 +165,12 @@ screen_height = root.winfo_screenheight()
 screen_resolution = str(screen_width) + 'x' + str(screen_height)
 
 #initialisation des variables écran 1920x1080
-title_size = int(172 * screen_width / 1920)
-chrono_size = int(142 * screen_width / 1920)
-canvas_size = int(500 * screen_width / 1920)
-clock_size = int(65 * screen_width / 1920)
-width = int(515 * screen_width / 1920)
+initial_screen = 1920
+title_size = int(172 * screen_width / initial_screen)
+chrono_size = int(142 * screen_width / initial_screen)
+canvas_size = int(500 * screen_width / initial_screen)
+clock_size = int(65 * screen_width / initial_screen)
+width = int(515 * screen_width / initial_screen)
 
 #initialisation des variables générales
 rayon = width / 2
@@ -196,9 +196,9 @@ chrono['text'] = "00:00:00"
 chrono.place(relx=0.5, rely=0.9, anchor=CENTER)
 
 #création des threads
-th1 = threading.Thread(target=onair)
-th2 = threading.Thread(target=second)
-th3 = threading.Thread(target=piface_read)
+th1 = threading.Thread(target=onair, daemon=True)
+th2 = threading.Thread(target=second, daemon=True)
+th3 = threading.Thread(target=piface_read, daemon=True)
 
 #initialisation du client TCP
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -217,6 +217,10 @@ for angle in range(0, 12):
 
 #création de la première seconde
 #C.create_oval(145, 25, 155, 35, fill='#FFAA00', tags="first")
+
+#création de l'heure
+hour = Label(root, text="")
+hour.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 #th3.start()
 th1.start()
