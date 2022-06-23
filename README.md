@@ -64,8 +64,6 @@ Rajouter en bas du fichier `@sudo python3 main.py`
 - "No PiFace Digital board detected":
   - Enlever et remettre bien la carte sur le RPI puis relancer le programme
   - Refaire la procédure d'installation des librairies
-#### Enlever la mise en veille du RPI:
-
 
 ***
 ## CHANGELOG
