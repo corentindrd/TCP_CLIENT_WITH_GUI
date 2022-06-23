@@ -27,7 +27,7 @@ avec les informations correspondantes de votre serveur TCP.
 ## INSTALLATION RPI
 
 - Flasher Raspbian Desktop sur la carte SD avec Raspberry Imager.
-  - Prendre la version Raspberry pi OS 4 avec Bureau.
+  - Prendre la version Raspberry pi OS 64bits avec Bureau.
   - Activer le SSH afin de rendre la première installation plus simple (CTRL+MAJ+X sur RPI imager pour activer le SSH).
 - Brancher votre RPI au secteur tout en aillant installé et branché votre écran, clavier, souris et avoir inséré votre carte SD avec le système d'exploitation.
   - Suivez les instructions du premier démarrage du RPI.
