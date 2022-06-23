@@ -16,20 +16,52 @@ Fonctionnement:
 - Carte SD ([Carte SD](https://www.amazon.fr/SanDisk-M%C3%A9moire-microSDHC-Adaptateur-homologu%C3%A9e/dp/B08GY9NYRM/ref=sr_1_7?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=3GQ2WS313G7WF&keywords=carte%2Bsd%2Bmicro%2B32&qid=1655934994&sprefix=carte%2Bsd%2Bmicro%2B32%2Caps%2C73&sr=8-7&th=1))
 - Alimentation Raspberry ([Alimentation](https://www.kubii.fr/alimentations/2678-alimentation-officielle-usb-type-c-raspberry-pi-3272496300002.html))
 - Ecran 16:9 avec entrée HDMI
-- Cable HDMI
+- Cable micro HDMI vers HDMI
 - Raspberry Imager ([Téléchargement](https://www.raspberrypi.com/software/))
+- FileZilla pour l'envoi de fichier par FTP ([Téléchargement](https://filezilla-project.org/download.php?type=client))
+- Un clavier et une souris pour la première installation sur le raspberry
 ***
 ## INSTALLATION
 
-- Flasher Raspbian Desktop sur la carte SD avec Raspberry Imager
-- Installer la carte PiFace sur le raspberry
+- Flasher Raspbian Desktop sur la carte SD avec Raspberry Imager.
+  - Prendre la version Raspberry pi OS 4 avec Bureau.
+  - Activer le SSH afin de rendre la première installation plus simple (CTRL+MAJ+X sur RPI imager pour activer le SSH).
 - Mettre à jour le raspberry (`sudo apt-get update & sudo apt-get upgrade -y`)
-- Installation des libraries requises
-  - Python3
-  - PiFace
+  - Faire un `sudo apt autoremove` si des paquets ne sont plus utilisés.
+  - Faire un reboot du RPI après la mise à jour `sudo reboot`.
+- Installer la carte PiFace sur le raspberry
+- Installer un serveur FTP sur le RPI pour transmettre le programme en réseau pour ne pas utiliser de clé usb ou disque dur externe.
+  - `sudo apt install proftpd`
+  - Sur FileZilla, rentrer l'adresse IP du RPI et les identifiants sont les mêmes que ceux rentrés au démarrage du RPI
+  - (Tuto [ici](https://raspberry-pi.fr/installer-serveur-ftp-raspberry-pi/) pour les compléments)
+- Mettre le fichier Main.py dans le répertoire afficher sur FileZilla 
+  - Utiliser la commande `ls` en ouvrant un terminal sur le RPI pour voir si le fichier est bien présent
+- Activer la fonction SPI du raspberry pour la prise en charge de la carte PiFace
+  - `sudo raspi-config` > Interface Options > SPI > Enable
+- Installer PIP pour python 3 s'il n'est pas installé
+  - `sudo apt install python3-pip`
+- Installation des librairies requises pour la carte PiFace
+  - `sudo pip3 install pifacecommon`
+  - `sudo pip3 install pifacedigitalio`
+  - Tuto complet [ici](https://github.com/piface/pifacedigitalio)
+
+#### Lancement automatique au démarrage du RPI :
+- Ouvrir un terminal  
+`sudo nano /etc/xdg/lxsession/LXDE-PI/autostart`  
+Rajouter en bas du fichier `@sudo python3 main.py`
+#### ❗ Messages d'erreurs ❗:
+- "No PiFace Digital board detected"
+  - Enlever et remettre bien la carte sur le RPI puis relancer le programme
+  - Refaire la procédure d'installation des librairies
+
 ***
 ## CHANGELOG
-### V1.2
+### V1.2.1
+#### **Améliorations et divers :**
+- La variable "canvas_size" n'était pas initialisée.
+- La taille de l'heure au centre était trop grande.
+- Changement de la taille des secondes et des heures qui était trop grande.
+### V1.2.0
 #### **Principaux ajouts :**
 - L'interface graphique fonctionne même sans la carte électronique PiFace d'installée
 
@@ -53,6 +85,6 @@ Fonctionnement:
 ## Crédits
 - Stéphane Ayreault
 - Mathieu Amiaud
-- Aurélien Menard
+- Aurélien Ménard
 ***
 

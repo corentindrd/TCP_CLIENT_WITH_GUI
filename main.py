@@ -120,7 +120,7 @@ def onair():
     while True:
         try:
             if connected is False:
-                sock.connect(('192.168.1.29', 65432))
+                sock.connect(('192.168.1.86', 65432))
                 print("Connexion au serveur réussie")
             message = sock.recv(1024).decode("UTF-8")
             if message.find("10,1") != -1:
@@ -145,7 +145,7 @@ def onair():
             print("Connexion perdue... reconnexion")
             while not connected:
                 try:
-                    sock.connect(('192.168.1.29', 65432))
+                    sock.connect(('192.168.1.86', 65432))
                     connected = True
                     print("Re-connexion réussie")
                 except socket.error:
@@ -169,8 +169,8 @@ screen_resolution = str(screen_width) + 'x' + str(screen_height)
 title_size = int(172 * screen_width / 1920)
 chrono_size = int(142 * screen_width / 1920)
 canvas_size = int(500 * screen_width / 1920)
-clock_size = int(80 * screen_width / 1920)
-width = int(557 * screen_width / 1920)
+clock_size = int(65 * screen_width / 1920)
+width = int(515 * screen_width / 1920)
 
 #initialisation des variables générales
 rayon = width / 2
@@ -188,7 +188,7 @@ title = Label(root, text="ON AIR", font=("Avenir-Black", title_size), bg='#4D000
 title.place(relx=0.5, rely=0.12, anchor=CENTER)
 
 #création du canvas
-C = Canvas(root, bg="black", height=width, width=width, highlightthickness=0)
+C = Canvas(root, bg="black", height=canvas_size, width=canvas_size, highlightthickness=0)
 
 #création du chrono
 chrono = Label(root, fg='white', bg='black', font=("Avenir-Black", chrono_size))
