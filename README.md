@@ -84,7 +84,7 @@ Rajouter en bas du fichier `@sudo python3 main.py`
 ### V1.2.1
 #### **Améliorations et divers :**
 - La variable "canvas_size" n'était pas initialisée.
-- Changement de la taille de  l'heure au centre était trop grande.
+- Changement de la taille de l'heure au centre qui était trop grande.
 - Changement de la taille des secondes et des heures qui était trop grande.
 ### V1.2.0
 #### **Principaux ajouts :**
