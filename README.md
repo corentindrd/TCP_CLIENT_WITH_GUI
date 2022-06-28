@@ -1,4 +1,4 @@
-# RPI RADIO BROADCASTd
+# RPI RADIO BROADCAST
 
 Ce programme est un client TCP de réception de trame venant d'un serveur.  
 Il est utilisé afin de récupérer une trame TCP venant d'un serveur installé dans un studio afin d'avoir un retour d'information lorsque l'animateur est à l'antenne.  
