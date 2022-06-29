@@ -5,20 +5,21 @@ Ce programme est un client TCP de réception de trame venant d'un serveur.
 ***
 
 ## Prérequis
-- Raspberry PI 4 (2,4,8G) ([Raspberry](https://www.kubii.fr/cartes-raspberry-pi/2772-nouveau-raspberry-pi-4-modele-b-4gb-kubii-0765756931182.html))
-- (optionnel) PiFace digital 2 ([PiFace](https://shop.mchobby.be/fr/pi-hats/221-piface-digital-2-pour-raspberry-pi-3232100002210.html))
-- Carte SD ([Carte SD](https://www.amazon.fr/SanDisk-M%C3%A9moire-microSDHC-Adaptateur-homologu%C3%A9e/dp/B08GY9NYRM/ref=sr_1_7?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=3GQ2WS313G7WF&keywords=carte%2Bsd%2Bmicro%2B32&qid=1655934994&sprefix=carte%2Bsd%2Bmicro%2B32%2Caps%2C73&sr=8-7&th=1))
-- Alimentation Raspberry ([Alimentation](https://www.kubii.fr/alimentations/2678-alimentation-officielle-usb-type-c-raspberry-pi-3272496300002.html))
-- Ecran 16:9 avec entrée HDMI
-- Cable micro HDMI vers HDMI
-- Raspberry Imager ([Téléchargement](https://www.raspberrypi.com/software/))
-- FileZilla pour l'envoi de fichier par FTP ([Téléchargement](https://filezilla-project.org/download.php?type=client))
-- Un clavier et une souris pour la première configuration du RPI
+- Raspberry PI 4 (2,4,8G) ([Raspberry](https://www.kubii.fr/cartes-raspberry-pi/2772-nouveau-raspberry-pi-4-modele-b-4gb-kubii-0765756931182.html)).
+- (optionnel) PiFace digital 2 ([PiFace](https://shop.mchobby.be/fr/pi-hats/221-piface-digital-2-pour-raspberry-pi-3232100002210.html)).
+- Carte SD ([Carte SD](https://www.amazon.fr/SanDisk-M%C3%A9moire-microSDHC-Adaptateur-homologu%C3%A9e/dp/B08GY9NYRM/ref=sr_1_7?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=3GQ2WS313G7WF&keywords=carte%2Bsd%2Bmicro%2B32&qid=1655934994&sprefix=carte%2Bsd%2Bmicro%2B32%2Caps%2C73&sr=8-7&th=1)).
+- Alimentation Raspberry ([Alimentation](https://www.kubii.fr/alimentations/2678-alimentation-officielle-usb-type-c-raspberry-pi-3272496300002.html)).
+- Ecran 16:9 avec entrée HDMI.
+- Cable micro HDMI vers HDMI.
+- Raspberry Imager ([Téléchargement](https://www.raspberrypi.com/software/)).
+- FileZilla pour l'envoi de fichier par FTP ([Téléchargement](https://filezilla-project.org/download.php?type=client)).
+- Un clavier et une souris pour la première configuration du RPI.
 ***
-## MISE EN PLACE DU PROGRAMME
-Pour une bonne utilisation du programme en fonction de votre installation il suffit de changer l'adresse IP et le port à la ligne 123 et 148
-avec les informations correspondantes de votre serveur TCP.
-## INSTALLATION RPI
+## MISE EN PLACE DU PROGRAMME MANUELLEMENT
+- Télécharger la version du programme souhaitée.
+- Changer l'adresse IP par l'adresse de votre serveur dans la variable "ipaddress".
+- Changer le numéro de port par celui souhaitée dans la variable "port".
+## INSTALLATION RPI MANUELLEMENT
 
 - Flasher Raspbian Desktop sur la carte SD avec Raspberry Imager.
   - Prendre la version Raspberry pi OS 64bits avec Bureau.
@@ -56,16 +57,23 @@ Rajouter en bas du fichier `@sudo python3 main.py`
   - Le fichier main.py n'est pas dans le bon répertoire, le fichier autostart est défini de base dans le répertoire `/home/pi/`  
   Si le programme est dans un autre répertoire il faut l'indiquer dans le fichier autostart EXEMPLE : `@sudo python3 /home/pi/radio/main.py`
 - "No PiFace Digital board detected":
-  - Enlever et remettre bien la carte sur le RPI puis relancer le programme
-  - Refaire la procédure d'installation des librairies
+  - Enlever et remettre bien la carte sur le RPI puis relancer le programme.
+  - Refaire la procédure d'installation des librairies.
 
 ***
 ## CHANGELOG
+### V1.3.2
+#### **Améliorations et divers :**
+- Ajout de la variable "ipaddress" qui permet de changer l'adresse IP du serveur plus facilement.
+- Ajout de la variable "port" qui permet de changer le port de connexion au serveur plus facilement.
+- Le chrono ne s'affiche plus au lancement du programme tant que le serveur n'a pas envoyé l'information ON AIR.
+- Nettoyage du code au niveau des importations.
+- Nettoyage du code au niveau des commentaires.
 ### V1.3.1
 #### **Améliorations et divers :**
 - Diminution du lag des secondes entre l'heure et les points jaunes.
   - La fonction des heures a été déplacée dans la fonction trigonométrie pour éviter la latence.
-  - La fonction "second" a été suprrimée pour éviter la latence.
+  - La fonction "second" a été supprimée pour éviter la latence.
 ### V1.3
 #### **Principaux ajouts :**
 - L'heure du milieu ne disparait plus à certains moments lors du changement de seconde.
@@ -82,7 +90,8 @@ Rajouter en bas du fichier `@sudo python3 main.py`
 - Changement de la taille des secondes et des heures qui était trop grande.
 ### V1.2.0
 #### **Principaux ajouts :**
-- L'interface graphique fonctionne même sans la carte électronique PiFace installée
+- L'interface graphique fonctionne même sans la carte électronique PiFace installée.
+  - Ajout d'un système d'exception lors de l'utilisation des librairies PiFace.
 
 ### V1.1
 #### **Principaux ajouts :**
