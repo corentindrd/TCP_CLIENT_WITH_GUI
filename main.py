@@ -8,15 +8,16 @@ from tkinter import *
 
 try:
     import pifacedigitalio as p
+    piface = 1
 except:
+    piface = 0
     pass
 
 # fonction chrono
 
 def updateTime():
 
-    global chronotitle
-    global str_time
+    global chronotitle, str_time
 
     if startchrono == 1:
         now = default_timer() - start
@@ -54,11 +55,8 @@ def trigo():
 
 # fonction serveur tcp
 def onair():
-    global connected
-    global sock
-    global title
-    global start
-    global startchrono
+
+    global connected, sock, title, start, startchrono
 
     while True:
         try:
@@ -70,7 +68,9 @@ def onair():
                 updateTime()
                 try:
                     p.digital_write(0, 1)
+                    voyant1.create_rectangle(0, 0, 60, 20, fill='green')
                 except:
+                    voyant1.create_rectangle(0, 0, 60, 20, fill='red')
                     pass
             elif message.find("10,0") != -1:
                 title.config(text="ON AIR", font=("Avenir-Black", title_size), bg='#4D0000', fg='black')
@@ -78,18 +78,22 @@ def onair():
                 updateTime()
                 try:
                     p.digital_write(0, 0)
+                    voyant1.create_rectangle(0, 0, 60, 20, fill='green')
                 except:
+                    voyant1.create_rectangle(0, 0, 60, 20, fill='red')
                     pass
 
         except socket.error:
             connected = False
             sock = socket.socket()
             print("Connexion perdue... reconnexion")
+            voyant3.create_rectangle(0, 0, 60, 20, fill='red')
             while not connected:
                 try:
                     sock.connect((ipaddress, port))
                     connected = True
                     print("Re-connexion réussie")
+                    voyant3.create_rectangle(0, 0, 60, 20, fill='green')
                 except socket.error:
                     time.sleep(0.5)
 
@@ -138,9 +142,40 @@ root.attributes("-fullscreen", True)
 title = Label(root, text="ON AIR", font=("Avenir-Black", title_size), bg='#4D0000', fg='black')
 title.place(relx=0.5, rely=0.12, anchor=CENTER)
 
-#création du canvas
+#création du canvas secondes et heures
 
 C = Canvas(root, bg="black", height=canvas_size, width=canvas_size, highlightthickness=0)
+
+#création des canvas voyants
+
+voyant1 = Canvas(root, bg="white", height=20, width=60, highlightthickness=0)
+voyant2 = Canvas(root, bg="white", height=20, width=60, highlightthickness=0)
+voyant3 = Canvas(root, bg="white", height=20, width=60, highlightthickness=0)
+
+voyant1.create_rectangle(0, 0, 60, 20, fill='red')
+voyant2.create_rectangle(0, 0, 60, 20, fill='red')
+voyant3.create_rectangle(0, 0, 60, 20, fill='red')
+
+voyant1.place(relx=0.05, rely=0.95, anchor=CENTER)
+voyant2.place(relx=0.1, rely=0.95, anchor=CENTER)
+voyant3.place(relx=0.15, rely=0.95, anchor=CENTER)
+
+#création des titres voyants
+
+voyanttitre1 = Label(root, text="PiFace 2", font=("Avenir-Black", 10), bg='black', fg='white')
+voyanttitre2 = Label(root, text="Librairies", font=("Avenir-Black", 10), bg='black',  fg='white')
+voyanttitre3 = Label(root, text="Serveur", font=("Avenir-Black", 10), bg='black', fg='white')
+
+voyanttitre1.place(relx=0.05, rely=0.93, anchor=CENTER)
+voyanttitre2.place(relx=0.1, rely=0.93, anchor=CENTER)
+voyanttitre3.place(relx=0.15, rely=0.93, anchor=CENTER)
+
+#affichage voyant libraries
+
+if piface == 1:
+    voyant2.create_rectangle(0, 0, 60, 20, fill='green')
+else:
+    voyant2.create_rectangle(0, 0, 60, 20, fill='red')
 
 #création du chrono
 

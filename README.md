@@ -1,6 +1,12 @@
-# RPI RADIO BROADCAST
+# CLIENT TCP AVEC INTERFACE GRAPHIQUE
 
-Ce programme est un client TCP de réception de trame venant d'un serveur. 
+Ce logiciel est un client TCP qui permet de recevoir un message via le protocole TCP venant d'un serveur 
+puis de l'interpréter afin d'effectuer une action graphique, logicielle ou mécanique sur un relais par exemple.
+Sur windows il comporte en plus un système de sauvegarde de configuration et d'un système d'envoi de mail. 
+Des logs sont également gérer et stockés dans le répertoire _C:/User/Program Files/BROADCAST SOLUTION_ .
+
+Ce logiciel à été concu pour une utilisation en radio pour permettre au studio d'envoyé des informations
+sur un studio déporté à l'autre bout de la planète. Mais il peut être adapté à toutes situations.
 
 ***
 
@@ -19,7 +25,7 @@ Ce programme est un client TCP de réception de trame venant d'un serveur.
 - Raspberry Pi 4 ([Raspberry](https://www.kubii.fr/cartes-raspberry-pi/2772-nouveau-raspberry-pi-4-modele-b-4gb-kubii-0765756931182.html)).
 - Carte PiFace digital 2 ([PiFace](https://shop.mchobby.be/fr/pi-hats/221-piface-digital-2-pour-raspberry-pi-3232100002210.html)).
 - Médialon Manager ([Téléchargement](https://medialon.com/products/medialon-manager/) )
-- Windows (soon)
+- Tout système comportant un serveur TCP
 
 ## Installation sur Raspberry Pi 4
 - Flasher Raspbian Desktop sur la carte SD avec Raspberry Imager.
@@ -57,16 +63,31 @@ Ce programme est un client TCP de réception de trame venant d'un serveur.
 - Ouvrir un terminal.
 `sudo nano /etc/xdg/lxsession/LXDE-PI/autostart`  
 Rajouter en bas du fichier `@sudo python3 main.py`
-#### ❗ Problèmes connus ❗:
+#### ❗ Problèmes connus Raspberry❗:
 - Le programme ne se lance pas au démarrage du RPI :
   - Le fichier main.py n'est pas dans le bon répertoire, le fichier autostart est défini de base dans le répertoire `/home/pi/`  
   Si le programme est dans un autre répertoire il faut l'indiquer dans le fichier autostart EXEMPLE : `@sudo python3 /home/pi/radio/main.py`
 - "_No PiFace Digital board detected_":
   - Enlever et remettre la carte sur le RPI puis relancer le programme.
   - Refaire la procédure d'installation des librairies.
+#### ❗ Problèmes connus windows❗:
 
 ***
 ## CHANGELOG
+### V1.4.0
+#### **Principaux ajouts (windows) :**
+- **Arrivée du programme sur windows :**
+  - Système de sauvegarde de configuration
+  - Bouton paramètres avec interface graphique ayant la possibilité de changer les informations : réseau (adresse IP et port) , messages provenant du serveur
+  - Ajout d'un système d'envoi de mail (fonction actuellement en test) fonctionnant avec GMAIL en créant un mot de passe pour application avec votre adresse GMAIL ([APP Password](https://myaccount.google.com/apppasswords))
+  - Ajout d'un bouton qui permet de redémarrer le client
+#### **Améliorations et divers (windows) :**
+- Ajout d'un bouton quitter en haut à droite 
+#### **Principaux ajouts (linux) :**
+- Ajout de voyants :
+  - Voyant _PiFace_ pour savoir si votre carte PiFace est bien installée et reconnue
+  - Voyant _Librairies_ pour savoir si toutes les librairies nécessaires ont bien été chargée et correctement installés
+  - Voyant _Serveur_ pour savoir si la connexion au serveur est bien active
 ### V1.3.3
 #### **Principaux ajouts :**
 - Refonte complète du système de chronomètre pour diminuer la charge système.
